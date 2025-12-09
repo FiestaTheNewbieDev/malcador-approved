@@ -1,0 +1,21 @@
+name: Production Deployment
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Vercel Production
+        uses: ./.github/actions/vercel-deployment
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          environment: production
