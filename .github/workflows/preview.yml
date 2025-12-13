@@ -2,7 +2,7 @@ name: Preview Deployment
 
 on:
   push:
-    branches: [develop, feature/ci-cd]
+    branches: [develop]
 
 jobs:
   deploy:
