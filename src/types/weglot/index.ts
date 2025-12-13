@@ -37,3 +37,5 @@ export interface IWeglotOptions {
   remove_unused_link_hooks?: boolean;
   extra_merged_selectors?: string[];
 }
+
+export type WeglotClassName = 'weglot-translate' | 'weglot-no-translate';

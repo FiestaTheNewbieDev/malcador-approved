@@ -19,11 +19,20 @@ const inter = Inter({ variable: '--font-inter', subsets: ['latin'] });
 
 const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <html lang="fr">
+    <html lang="fr" className="dark">
       <head>
         <WeglotScript />
       </head>
-      <body className={cn(inter.className)}>
+      <body
+        className={cn(
+          'bg-background relative h-screen w-screen overflow-hidden',
+          inter.className,
+        )}
+        // Remove hydration warning in development
+        {...(process.env.NODE_ENV === 'development' && {
+          suppressHydrationWarning: true,
+        })}
+      >
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>

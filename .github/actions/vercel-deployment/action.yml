@@ -5,7 +5,12 @@ inputs:
     required: true
   environment:
     required: false
-    default: 'production'
+    default: 'preview'
+
+outputs:
+  url:
+    description: 'Deployment URL'
+    value: ${{ steps.deploy.outputs.url }}
 
 runs:
   using: 'composite'
@@ -19,9 +24,21 @@ runs:
       shell: bash
 
     - name: Build Project Artifacts
-      run: vercel build --prod --token=${{ inputs.vercel-token }}
+      run: |
+        if [ "${{ inputs.environment }}" = "production" ]; then
+          vercel build --prod --token=${{ inputs.vercel-token }}
+        else
+          vercel build --token=${{ inputs.vercel-token }}
+        fi
       shell: bash
 
     - name: Deploy Project Artifacts to Vercel
-      run: vercel deploy --prebuilt --prod --token=${{ inputs.vercel-token }}
+      id: deploy
+      run: |
+        if [ "${{ inputs.environment }}" = "production" ]; then
+          url=$(vercel deploy --prebuilt --prod --token=${{ inputs.vercel-token }})
+        else
+          url=$(vercel deploy --prebuilt --token=${{ inputs.vercel-token }})
+        fi
+        echo "url=$url" >> $GITHUB_OUTPUT
       shell: bash

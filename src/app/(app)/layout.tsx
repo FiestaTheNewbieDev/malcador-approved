@@ -1,12 +1,16 @@
-import AppSidebar from '@components/layout/AppSidebar';
-import { SidebarInset, SidebarProvider } from '@components/ui/sidebar';
+import LightRays from '@components/LightRays';
+import { Fragment } from 'react/jsx-runtime';
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
-    </SidebarProvider>
+    <Fragment>
+      <LightRays
+        className="absolute"
+        followMouse={false}
+        raysOrigin="top-center"
+      />
+      {children}
+    </Fragment>
   );
 };
 
