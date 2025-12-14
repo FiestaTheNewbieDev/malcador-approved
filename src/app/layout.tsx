@@ -1,8 +1,9 @@
-import ReactQueryProvider from '@components/providers/ReactQueryProvider';
-import WeglotScript from '@components/scripts/WeglotScript';
+import ReactQueryProvider from '@components/providers/react-query-provider';
+import WeglotScript from '@components/scripts/weglot-script';
 import { OWNER_FULL_NAME } from '@constants/index';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import { NODE_ENV } from '@lib/env';
 import { cn } from '@lib/utils';
 import '@styles/globals.css';
 import type { Metadata } from 'next';
@@ -19,7 +20,7 @@ const inter = Inter({ variable: '--font-inter', subsets: ['latin'] });
 
 const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <html lang="fr" className="dark">
+    <html lang="en" className="dark">
       <head>
         <WeglotScript />
       </head>
@@ -29,7 +30,7 @@ const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
           inter.className,
         )}
         // Remove hydration warning in development
-        {...(process.env.NODE_ENV === 'development' && {
+        {...(NODE_ENV === 'development' && {
           suppressHydrationWarning: true,
         })}
       >
