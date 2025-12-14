@@ -1,15 +1,16 @@
+import { NODE_ENV } from '@lib/env';
 import ROUTES from '@routes/index';
 import { NextRequest, NextResponse, ProxyConfig } from 'next/server';
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const isComingSoonPage = pathname === ROUTES.comingSoon();
+  const isComingSoonPage = pathname === ROUTES.app.comingSoon();
 
   if (isComingSoonPage) return NextResponse.next();
 
-  if (process.env.NODE_ENV === 'production') {
-    const redirectUrl = new URL(ROUTES.comingSoon(), request.url);
+  if (NODE_ENV === 'production') {
+    const redirectUrl = new URL(ROUTES.app.comingSoon(), request.url);
     return NextResponse.rewrite(redirectUrl);
   }
 

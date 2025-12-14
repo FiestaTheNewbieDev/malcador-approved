@@ -1,10 +1,17 @@
 export interface IWeglot {
   initialize: (options: IWeglotOptions) => void;
+  initialized: boolean;
   getCurrentLang: () => string;
   getLanguageName: (code: string) => string;
   getBestAvailableLanguage: () => string;
   switchTo: (code: string) => void;
+  getAvailableLanguages: () => string[];
+  on: (event: WeglotEvent, callback: (...args: unknown[]) => void) => void;
+  off: (event: WeglotEvent, callback: (...args: unknown[]) => void) => void;
+  options: IWeglotOptions;
 }
+
+export type WeglotEvent = 'initialized' | 'languageChanged' | 'switchersReady';
 
 export interface IWeglotOptions {
   api_key: string;

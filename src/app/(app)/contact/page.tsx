@@ -1,5 +1,3 @@
-'use server';
-
 const Page: React.FC = () => {
   return null;
 };
