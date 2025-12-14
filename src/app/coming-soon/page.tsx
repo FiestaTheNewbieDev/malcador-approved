@@ -17,13 +17,15 @@ const Page: React.FC = () => (
       // followMouse={false}
       raysOrigin="top-center"
     />
-    <main className="flex h-full w-full flex-col items-center justify-center">
+    <main className="flex h-full w-full flex-col items-center justify-center p-4">
       <AnimatedContent
         className="flex flex-col items-center gap-4"
         delay={DELAY}
       >
-        <h1 className="text-foreground text-4xl font-bold">Coming Soon</h1>
-        <p className="text-muted-foreground text-lg">
+        <h1 className="text-foreground text-center text-4xl font-bold">
+          Coming Soon
+        </h1>
+        <p className="text-muted-foreground text-center text-lg">
           I am working on something great. Please check back later.
         </p>
         <div className="flex gap-2">
