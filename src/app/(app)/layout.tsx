@@ -1,18 +1,19 @@
-import Sidebar from '@components/app/sidebar';
+import { DesktopNav, MobileNav } from '@components/app/navigation';
 import LightRays from '@components/LightRays';
-import { Fragment } from 'react/jsx-runtime';
+import { SidebarProvider } from '@components/ui/sidebar';
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <Fragment>
+    <SidebarProvider className="flex-col">
       <LightRays
         className="absolute"
         // followMouse={false}
         raysOrigin="top-center"
       />
-      <Sidebar className="absolute top-1/2 left-4 -translate-y-1/2" />
+      <DesktopNav className="absolute top-1/2 left-4 -translate-y-1/2" />
+      <MobileNav className="sticky top-0" />
       {children}
-    </Fragment>
+    </SidebarProvider>
   );
 };
 

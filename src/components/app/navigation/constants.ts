@@ -1,7 +1,3 @@
-'use client';
-
-import SidebarItem, { ISidebarItemProps } from '@components/app/sidebar/item';
-import LangSwitcher from '@components/app/sidebar/lang-switcher';
 import {
   faAddressBook as faAddressBookRegular,
   faCircleUser as faCircleUserRegular,
@@ -14,14 +10,10 @@ import {
   faFolder as faFolderSolid,
   faHome as faHomeSolid,
 } from '@fortawesome/free-solid-svg-icons';
-import { cn } from '@lib/utils';
 import ROUTES from '@routes/index';
+import { INavItemProps } from './types';
 
-interface IProps {
-  className?: string;
-}
-
-const NAV_ITEMS: ISidebarItemProps[] = [
+export const NAV_ITEMS: INavItemProps[] = [
   {
     label: 'Home',
     icon: faHomeRegular,
@@ -51,20 +43,3 @@ const NAV_ITEMS: ISidebarItemProps[] = [
     isActive: (pathname) => pathname.startsWith(ROUTES.app.contact()),
   },
 ] as const;
-
-const Sidebar: React.FC<IProps> = ({ className }) => (
-  <aside className={cn('h-fit w-fit', className)} aria-label="Main navigation">
-    <nav>
-      <ul
-        className="border-sidebar-border flex h-fit flex-col gap-2 rounded-full border bg-transparent p-2"
-        role="list"
-      >
-        {NAV_ITEMS.map((item) => (
-          <SidebarItem key={item.href} {...item} />
-        ))}
-        <LangSwitcher />
-      </ul>
-    </nav>
-  </aside>
-);
-export default Sidebar;
