@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   },
 
   env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     ENABLE_WEGLOT: process.env.ENABLE_WEGLOT,
     NEXT_PUBLIC_WEGLOT_API_KEY: process.env.NEXT_PUBLIC_WEGLOT_API_KEY,
   },
