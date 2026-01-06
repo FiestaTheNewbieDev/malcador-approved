@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import NavIcon from '../nav-icon';
-import { INavItemProps } from '../types';
+import { NavItem } from '../types';
 
 const DEFAULT_DELAY_DURATION = 200;
 
@@ -35,7 +35,7 @@ export const triggerVariants = cva(
   },
 );
 
-const DesktopNavItem: React.FC<INavItemProps> = ({
+const DesktopNavItem: React.FC<NavItem> = ({
   label,
   icon,
   activeIcon,

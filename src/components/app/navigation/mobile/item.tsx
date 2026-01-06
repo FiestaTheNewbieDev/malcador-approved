@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import NavIcon from '../nav-icon';
-import { INavItemProps } from '../types';
+import { NavItem } from '../types';
 
-const MobileNavItem: React.FC<INavItemProps> = ({
+const MobileNavItem: React.FC<NavItem> = ({
   label,
   icon,
   activeIcon,

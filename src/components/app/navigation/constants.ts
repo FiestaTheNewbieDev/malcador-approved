@@ -11,9 +11,9 @@ import {
   faHome as faHomeSolid,
 } from '@fortawesome/free-solid-svg-icons';
 import ROUTES from '@routes/index';
-import { INavItemProps } from './types';
+import { NavItem } from './types';
 
-export const NAV_ITEMS: INavItemProps[] = [
+export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Home',
     icon: faHomeRegular,
