@@ -9,32 +9,28 @@ import {
 import { SidebarMenuButton, SidebarMenuItem } from '@components/ui/sidebar';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useLangSwitcher } from '@hooks/use-lang-switcher';
-import { cn, getWeglotClassName } from '@lib/utils';
+import { useLocaleSwitcher } from '@hooks/use-locale-switcher';
+import { cn } from '@lib/utils';
 import { useState } from 'react';
 
 const MobileLangSwitcher: React.FC = () => {
   const [open, setOpen] = useState(false);
   const {
-    isReady,
-    currentLangConfig,
-    availableLanguages,
-    switchLanguage,
-    getLangConfig,
-  } = useLangSwitcher();
+    availableLocales,
+    currentLocaleConfig,
+    getLocaleConfig,
+    switchLocale,
+  } = useLocaleSwitcher();
 
-  if (!isReady || !currentLangConfig) return null;
+  if (!availableLocales.length) return null;
 
   return (
     <SidebarMenuItem>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <SidebarMenuButton
-            isActive={open}
-            className={getWeglotClassName('no-translate')}
-          >
-            <span>{currentLangConfig.flag}</span>
-            <span>{currentLangConfig.label}</span>
+          <SidebarMenuButton isActive={open}>
+            <span>{currentLocaleConfig.flag}</span>
+            <span>{currentLocaleConfig.label}</span>
             <FontAwesomeIcon
               icon={faChevronUp}
               className={cn(
@@ -48,16 +44,13 @@ const MobileLangSwitcher: React.FC = () => {
           side="top"
           className="w-[--radix-popper-anchor-width]"
         >
-          {availableLanguages.map((lang) => {
-            const config = getLangConfig(lang);
+          {availableLocales.map((locale) => {
+            const config = getLocaleConfig(locale);
             return (
               <DropdownMenuItem
-                key={lang}
-                className={cn(
-                  'cursor-pointer',
-                  getWeglotClassName('no-translate'),
-                )}
-                onClick={() => switchLanguage(lang)}
+                key={locale}
+                className={cn('cursor-pointer')}
+                onClick={() => switchLocale(locale)}
               >
                 <span>{config?.flag}</span>
                 <span>{config?.label}</span>

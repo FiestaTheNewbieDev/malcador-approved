@@ -1,13 +1,5 @@
-import { IWeglot } from '@/types/weglot';
-
-declare global {
-  type Nullable<T> = T | null;
-  type NUllify<T extends object> = { [K in keyof T]: T[K] | null };
-
-  interface Window {
-    Weglot: IWeglot;
-  }
-}
+type Nullable<T> = T | null;
+type NUllify<T extends object> = { [K in keyof T]: T[K] | null };
 
 declare module '*.css' {
   const content: { [className: string]: string };
