@@ -11,32 +11,32 @@ import {
   faHome as faHomeSolid,
 } from '@fortawesome/free-solid-svg-icons';
 import ROUTES from '@routes/index';
-import { INavItemProps } from './types';
+import { NavItem } from './types';
 
-export const NAV_ITEMS: INavItemProps[] = [
+export const NAV_ITEMS: NavItem[] = [
   {
-    label: 'Home',
+    label: 'home.label',
     icon: faHomeRegular,
     activeIcon: faHomeSolid,
     href: ROUTES.app(),
     isActive: (pathname) => pathname === ROUTES.app(),
   },
   {
-    label: 'About',
+    label: 'about.label',
     icon: faCircleUserRegular,
     activeIcon: faCircleUserSolid,
     href: ROUTES.app.about(),
     isActive: (pathname) => pathname.startsWith(ROUTES.app.about()),
   },
   {
-    label: 'Projects',
+    label: 'projects.label',
     icon: faFolderRegular,
     activeIcon: faFolderSolid,
     href: ROUTES.app.projects(),
     isActive: (pathname) => pathname.startsWith(ROUTES.app.projects()),
   },
   {
-    label: 'Contact',
+    label: 'contact.label',
     icon: faAddressBookRegular,
     activeIcon: faAddressBookSolid,
     href: ROUTES.app.contact(),

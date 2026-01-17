@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "title": "Clément FOSSORIER",
+    "description": ""
+  },
+  "navigation": {
+    "home": {
+      "label": "Accueil"
+    },
+    "about": {
+      "label": "À propos"
+    },
+    "projects": {
+      "label": "Projets"
+    },
+    "contact": {
+      "label": "Contact"
+    }
+  },
+  "comingSoonPage": {
+    "title": "Prochainement",
+    "description": "Je travaille sur quelque chose de formidable. Revenez plus tard."
+  }
+}

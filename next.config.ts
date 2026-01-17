@@ -1,14 +1,12 @@
 import type { NextConfig } from 'next';
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  images: {
-    domains: ['cdn.weglot.com'],
-  },
-
   env: {
-    ENABLE_WEGLOT: process.env.ENABLE_WEGLOT,
-    NEXT_PUBLIC_WEGLOT_API_KEY: process.env.NEXT_PUBLIC_WEGLOT_API_KEY,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
