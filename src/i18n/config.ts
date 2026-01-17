@@ -1,3 +1,7 @@
+import enMessages from '@messages/en.json' assert { type: 'json' };
+
+export type TranslationKeys = NestedKeys<typeof enMessages>;
+
 export const LOCALES = ['en', 'fr'] as const;
 export type Locale = (typeof LOCALES)[number];
 

@@ -42,7 +42,7 @@ const MobileLangSwitcher: React.FC = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent
           side="top"
-          className="w-[--radix-popper-anchor-width]"
+          className="w-[var(--radix-popper-anchor-width)]"
         >
           {availableLocales.map((locale) => {
             const config = getLocaleConfig(locale);
