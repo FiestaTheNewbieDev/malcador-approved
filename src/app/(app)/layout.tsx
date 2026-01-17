@@ -1,12 +1,19 @@
 import LightRays from '@components/LightRays';
 import { LocaleProvider } from '@components/providers/locale-provider';
 import ReactQueryProvider from '@components/providers/react-query-provider';
+import { DOMAIN_NAME } from '@constants/index';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Locale, LOCALES } from '@i18n/config';
 import { NODE_ENV } from '@lib/env';
 import { cn } from '@lib/utils';
+import { prefetchProfile } from '@services/profiles/profiles.hooks';
 import '@styles/globals.css';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { AbstractIntlMessages } from 'next-intl';
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -31,20 +38,21 @@ const loadAllMessages = async (): Promise<
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  const t = await getTranslations({
-    locale,
-    namespace: 'metadata',
-  });
+  const t = await getTranslations({ locale, namespace: 'metadata' });
 
   return {
-    title: t('title'),
+    title: t('title', { domainName: DOMAIN_NAME }),
     description: t('description'),
   };
 }
 
 const AppLayout = async ({ children }: AppLayoutProps) => {
+  const queryClient = new QueryClient();
+
   const locale = (await getLocale()) as Locale;
   const messages = await loadAllMessages();
+
+  await prefetchProfile(queryClient);
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -64,7 +72,11 @@ const AppLayout = async ({ children }: AppLayoutProps) => {
             // followMouse={false}
             raysOrigin="top-center"
           />
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              {children}
+            </HydrationBoundary>
+          </ReactQueryProvider>
         </LocaleProvider>
       </body>
     </html>

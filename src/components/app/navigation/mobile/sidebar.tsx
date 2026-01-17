@@ -7,9 +7,12 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
+  SidebarHeader,
   SidebarMenu,
 } from '@components/ui/sidebar';
+import { DOMAIN_NAME } from '@constants/index';
 import { useIsMobile } from '@hooks/use-mobile';
+import Link from 'next/link';
 import { NAV_ITEMS } from '../constants';
 import MobileNavItem from './item';
 
@@ -20,6 +23,9 @@ const MobileNavSidebar: React.FC = () => {
 
   return (
     <Sidebar>
+      <SidebarHeader>
+        <Link href="/">{DOMAIN_NAME}</Link>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
