@@ -6,11 +6,12 @@ import {
   TooltipTrigger,
 } from '@components/ui/tooltip';
 import { cva } from 'class-variance-authority';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import NavIcon from '../nav-icon';
-import { INavItemProps } from '../types';
+import { NavItem } from '../types';
 
 const DEFAULT_DELAY_DURATION = 200;
 
@@ -35,7 +36,7 @@ export const triggerVariants = cva(
   },
 );
 
-const DesktopNavItem: React.FC<INavItemProps> = ({
+const DesktopNavItem: React.FC<NavItem> = ({
   label,
   icon,
   activeIcon,
@@ -43,6 +44,7 @@ const DesktopNavItem: React.FC<INavItemProps> = ({
   isActive,
   disabled,
 }) => {
+  const t = useTranslations('navigation');
   const pathname = usePathname();
 
   const active = useMemo(() => isActive(pathname), [isActive, pathname]);
@@ -54,22 +56,22 @@ const DesktopNavItem: React.FC<INavItemProps> = ({
           {disabled ? (
             <button className={triggerVariants({ active, disabled })} disabled>
               <NavIcon icon={icon} activeIcon={activeIcon} isActive={active} />
-              <span className="sr-only">{label}</span>
+              <span className="sr-only">{t(label)}</span>
             </button>
           ) : (
             <Link
               className={triggerVariants({ active })}
               href={href}
-              aria-label={label}
+              aria-label={t(label)}
               aria-current={active ? 'page' : undefined}
             >
               <NavIcon icon={icon} activeIcon={activeIcon} isActive={active} />
-              <span className="sr-only">{label}</span>
+              <span className="sr-only">{t(label)}</span>
             </Link>
           )}
         </TooltipTrigger>
         <TooltipContent className="side-right" side="right">
-          {label}
+          {t(label)}
         </TooltipContent>
       </Tooltip>
     </li>

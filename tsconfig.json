@@ -19,11 +19,13 @@
       }
     ],
     "paths": {
+      "@messages/*": ["./messages/*"],
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
       "@routes/*": ["./src/constants/routes/*"],
       "@constants/*": ["./src/constants/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@i18n/*": ["./src/i18n/*"],
       "@lib/*": ["./src/lib/*"],
       "@styles/*": ["./src/styles/*"],
       "@/*": ["./src/*"]
