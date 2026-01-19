@@ -4,7 +4,7 @@ import * as API from './profiles.api';
 import * as Types from './profiles.types';
 
 const QUERY_KEYS = {
-  profile: ['profile'],
+  profile: () => ['profile'],
 } as const;
 
 type ProfileOptions = Omit<
@@ -28,7 +28,7 @@ export const useProfile = (options: ProfileOptions = {}) =>
     RequesterError,
     Types.GetProfilesResponse['profiles'][0]
   >({
-    queryKey: QUERY_KEYS.profile,
+    queryKey: QUERY_KEYS.profile(),
     queryFn: () => API.getProfile(),
     select: (data) => data.profiles[0],
     ...PROFILE_DEFAULT_OPTIONS,
@@ -40,7 +40,7 @@ export const prefetchProfile = async (
   options: ProfileOptions = {},
 ) => {
   await queryClient.prefetchQuery<Types.GetProfilesResponse, RequesterError>({
-    queryKey: QUERY_KEYS.profile,
+    queryKey: QUERY_KEYS.profile(),
     queryFn: () => API.getProfile(),
     ...PROFILE_DEFAULT_OPTIONS,
     ...options,

@@ -68,7 +68,7 @@ const AppLayout = async ({ children }: AppLayoutProps) => {
       >
         <LocaleProvider initialLocale={locale} messages={messages}>
           <LightRays
-            className="absolute"
+            className="absolute -z-10"
             // followMouse={false}
             raysOrigin="top-center"
           />
