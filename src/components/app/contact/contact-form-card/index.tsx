@@ -78,10 +78,10 @@ export const ContactFormCard: React.FC<IProps> = ({
       {
         onSuccess: () => {
           form.reset();
-          toast.success('Message sent successfully!');
+          toast.success(t('successMessage'));
         },
         onError: (error) => {
-          toast.error(error.data.message || 'Oops! Something went wrong.');
+          toast.error(error.data.message || t('errorMessage'));
         },
       },
     );

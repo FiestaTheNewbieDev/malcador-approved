@@ -70,7 +70,9 @@
         "submit": {
           "label": "Submit"
         }
-      }
+      },
+      "successMessage": "Your message has been sent successfully.",
+      "errorMessage": "There was an error sending your message. Please try again later."
     }
   },
   "comingSoonPage": {

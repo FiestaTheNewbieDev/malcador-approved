@@ -70,7 +70,9 @@
         "submit": {
           "label": "Envoyer"
         }
-      }
+      },
+      "successMessage": "Votre message a été envoyé avec succès.",
+      "errorMessage": "Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer plus tard."
     }
   },
   "comingSoonPage": {
