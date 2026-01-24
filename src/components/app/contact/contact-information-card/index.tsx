@@ -11,6 +11,7 @@ import {
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faLocation, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { cn } from '@lib/utils';
+import ROUTES from '@routes/index';
 import { useProfile } from '@services/profiles/profiles.hooks';
 import { useTranslations } from 'next-intl';
 
@@ -39,11 +40,24 @@ export const ContactInformationCard: React.FC<IProps> = ({
           <InformationRow
             icon={faEnvelope}
             text={email}
-            href={`mailto:${email}`}
+            href={ROUTES.externals.email(email)}
           />
         )}
-        {!!phoneNumber && <InformationRow icon={faPhone} text={phoneNumber} />}
-        {!!location && <InformationRow icon={faLocation} text={location} />}
+        {!!phoneNumber && (
+          <InformationRow
+            icon={faPhone}
+            text={phoneNumber}
+            href={ROUTES.externals.phone(phoneNumber)}
+          />
+        )}
+        {!!location && (
+          <InformationRow
+            icon={faLocation}
+            text={location}
+            href={ROUTES.externals.googleMaps(location)}
+            target="_blank"
+          />
+        )}
       </CardContent>
     </Card>
   );

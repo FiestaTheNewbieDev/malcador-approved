@@ -28,29 +28,51 @@
       "title": "Contact",
       "fields": {
         "firstName": {
-          "label": "Prénom"
+          "label": "Prénom",
+          "errors": {
+            "nonempty": "Le prénom est requis.",
+            "maxLength": "Le prénom ne peut pas dépasser {max} caractères."
+          }
         },
         "lastName": {
-          "label": "Nom de famille"
+          "label": "Nom de famille",
+          "errors": {
+            "nonempty": "Le nom de famille est requis.",
+            "maxLength": "Le nom de famille ne peut pas dépasser {max} caractères."
+          }
         },
         "organizationName": {
-          "label": "Nom de l'organisation"
+          "label": "Nom de l'organisation",
+          "errors": {
+            "maxLength": "Le nom de l'organisation ne peut pas dépasser {max} caractères."
+          }
         },
         "email": {
-          "label": "Adresse e-mail"
+          "label": "Adresse e-mail",
+          "errors": {
+            "invalid": "L'adresse e-mail n'est pas valide."
+          }
         },
         "phoneNumber": {
-          "label": "Numéro de téléphone"
+          "label": "Numéro de téléphone",
+          "errors": {
+            "maxLength": "Le numéro de téléphone ne peut pas dépasser {max} caractères."
+          }
         },
         "message": {
-          "label": "Message"
+          "label": "Message",
+          "errors": {
+            "nonempty": "Le message est requis."
+          }
         }
       },
       "buttons": {
         "submit": {
           "label": "Envoyer"
         }
-      }
+      },
+      "successMessage": "Votre message a été envoyé avec succès.",
+      "errorMessage": "Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer plus tard."
     }
   },
   "comingSoonPage": {

@@ -1,6 +1,7 @@
 import LightRays from '@components/LightRays';
 import { LocaleProvider } from '@components/providers/locale-provider';
 import ReactQueryProvider from '@components/providers/react-query-provider';
+import { Toaster } from '@components/ui/sonner';
 import { DOMAIN_NAME } from '@constants/index';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -75,6 +76,7 @@ const AppLayout = async ({ children }: AppLayoutProps) => {
           <ReactQueryProvider>
             <HydrationBoundary state={dehydrate(queryClient)}>
               {children}
+              <Toaster />
             </HydrationBoundary>
           </ReactQueryProvider>
         </LocaleProvider>
