@@ -32,6 +32,7 @@ import {
   PHONE_NUMBER_MAX_LENGTH,
 } from 'optimus-package/schemas/contact-message.schema';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import z from 'zod';
 
 interface IProps extends ICardProps {
@@ -62,17 +63,28 @@ export const ContactFormCard: React.FC<IProps> = ({
   function onSubmit(values: FormValues) {
     if (isPending) return;
 
-    sendContactMessage({
-      profileUuid: targetProfileUuid,
-      data: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        organizationName: values.organizationName || undefined,
-        email: values.email,
-        phoneNumber: values.phoneNumber || undefined,
-        message: values.message,
+    sendContactMessage(
+      {
+        profileUuid: targetProfileUuid,
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          organizationName: values.organizationName || undefined,
+          email: values.email,
+          phoneNumber: values.phoneNumber || undefined,
+          message: values.message,
+        },
       },
-    });
+      {
+        onSuccess: () => {
+          form.reset();
+          toast.success('Message sent successfully!');
+        },
+        onError: (error) => {
+          toast.error(error.data.message || 'Oops! Something went wrong.');
+        },
+      },
+    );
   }
 
   return (
@@ -146,7 +158,7 @@ export const ContactFormCard: React.FC<IProps> = ({
               render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>{t('fields.email.label')}*</FormLabel>
-                  <Input {...field} autoComplete="work email" />
+                  <Input {...field} autoComplete="email" />
                   {!!fieldState.error?.message && (
                     <FormMessage>{t(fieldState.error?.message)}</FormMessage>
                   )}
