@@ -28,22 +28,42 @@
       "title": "Contact",
       "fields": {
         "firstName": {
-          "label": "First Name"
+          "label": "First Name",
+          "errors": {
+            "nonempty": "First name is required.",
+            "maxLength": "First name cannot exceed {max} characters."
+          }
         },
         "lastName": {
-          "label": "Last Name"
+          "label": "Last Name",
+          "errors": {
+            "nonempty": "Last name is required.",
+            "maxLength": "Last name cannot exceed {max} characters."
+          }
         },
         "organizationName": {
-          "label": "Organization Name"
+          "label": "Organization Name",
+          "errors": {
+            "maxLength": "Organization name cannot exceed {max} characters."
+          }
         },
         "email": {
-          "label": "Email"
+          "label": "Email",
+          "errors": {
+            "invalid": "Email address is not valid."
+          }
         },
         "phoneNumber": {
-          "label": "Phone Number"
+          "label": "Phone Number",
+          "errors": {
+            "maxLength": "Phone number cannot exceed {max} characters."
+          }
         },
         "message": {
-          "label": "Message"
+          "label": "Message",
+          "errors": {
+            "nonempty": "Message is required."
+          }
         }
       },
       "buttons": {
