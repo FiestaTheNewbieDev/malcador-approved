@@ -16,7 +16,7 @@ import { NavItem } from '../types';
 const DEFAULT_DELAY_DURATION = 200;
 
 export const triggerVariants = cva(
-  `border-sidebar-border flex aspect-square h-12 w-12 items-center justify-center rounded-full border transition-colors duration-${DEFAULT_DELAY_DURATION} active:ring-0 select-none`,
+  `border-sidebar-border flex aspect-square h-12 w-12 items-center justify-center rounded-full border transition-colors duration-${DEFAULT_DELAY_DURATION} active:ring-0 select-none backdrop-blur-sm`,
   {
     variants: {
       active: {
