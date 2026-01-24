@@ -38,7 +38,7 @@
     "next": "^16.0.8",
     "next-intl": "^4.7.0",
     "ogl": "^1.0.11",
-    "optimus-package": "github:FiestaTheNewbieDev/optimus-package",
+    "optimus-package": "https://github.com/TheUnificationProject/optimus-package.git",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-hook-form": "^7.71.1",
