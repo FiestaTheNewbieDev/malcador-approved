@@ -25,7 +25,14 @@ import { useSendMessage } from '@services/contact-messages/contact-messages.hook
 import { sendContactMessageSchema } from '@services/contact-messages/contact-messages.schemas';
 import { useProfile } from '@services/profiles/profiles.hooks';
 import { useTranslations } from 'next-intl';
+import {
+  FIRST_NAME_MAX_LENGTH,
+  LAST_NAME_MAX_LENGTH,
+  ORGANIZATION_NAME_MAX_LENGTH,
+  PHONE_NUMBER_MAX_LENGTH,
+} from 'optimus-package/schemas/contact-message.schema';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import z from 'zod';
 
 interface IProps extends ICardProps {
@@ -56,17 +63,28 @@ export const ContactFormCard: React.FC<IProps> = ({
   function onSubmit(values: FormValues) {
     if (isPending) return;
 
-    sendContactMessage({
-      profileUuid: targetProfileUuid,
-      data: {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        organizationName: values.organizationName || undefined,
-        email: values.email,
-        phoneNumber: values.phoneNumber || undefined,
-        message: values.message,
+    sendContactMessage(
+      {
+        profileUuid: targetProfileUuid,
+        data: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          organizationName: values.organizationName || undefined,
+          email: values.email,
+          phoneNumber: values.phoneNumber || undefined,
+          message: values.message,
+        },
       },
-    });
+      {
+        onSuccess: () => {
+          form.reset();
+          toast.success(t('successMessage'));
+        },
+        onError: (error) => {
+          toast.error(error.data.message || t('errorMessage'));
+        },
+      },
+    );
   }
 
   return (
@@ -85,22 +103,34 @@ export const ContactFormCard: React.FC<IProps> = ({
               <FormField
                 control={form.control}
                 name="firstName"
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel>{t('fields.firstName.label')}*</FormLabel>
                     <Input {...field} autoComplete="given-name" />
-                    <FormMessage />
+                    {!!fieldState.error?.message && (
+                      <FormMessage>
+                        {t(fieldState.error?.message, {
+                          max: FIRST_NAME_MAX_LENGTH,
+                        })}
+                      </FormMessage>
+                    )}
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
                 name="lastName"
-                render={({ field }) => (
+                render={({ field, fieldState }) => (
                   <FormItem>
                     <FormLabel>{t('fields.lastName.label')}*</FormLabel>
                     <Input {...field} autoComplete="family-name" />
-                    <FormMessage />
+                    {!!fieldState.error?.message && (
+                      <FormMessage>
+                        {t(fieldState.error?.message, {
+                          max: LAST_NAME_MAX_LENGTH,
+                        })}
+                      </FormMessage>
+                    )}
                   </FormItem>
                 )}
               />
@@ -108,47 +138,63 @@ export const ContactFormCard: React.FC<IProps> = ({
             <FormField
               control={form.control}
               name="organizationName"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>{t('fields.organizationName.label')}</FormLabel>
                   <Input {...field} autoComplete="organization" />
-                  <FormMessage />
+                  {!!fieldState.error?.message && (
+                    <FormMessage>
+                      {t(fieldState.error?.message, {
+                        max: ORGANIZATION_NAME_MAX_LENGTH,
+                      })}
+                    </FormMessage>
+                  )}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>{t('fields.email.label')}*</FormLabel>
-                  <Input {...field} autoComplete="work email" />
-                  <FormMessage />
+                  <Input {...field} autoComplete="email" />
+                  {!!fieldState.error?.message && (
+                    <FormMessage>{t(fieldState.error?.message)}</FormMessage>
+                  )}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="phoneNumber"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>{t('fields.phoneNumber.label')}</FormLabel>
                   <PhoneInput {...field} />
-                  <FormMessage />
+                  {!!fieldState.error?.message && (
+                    <FormMessage>
+                      {t(fieldState.error?.message, {
+                        max: PHONE_NUMBER_MAX_LENGTH,
+                      })}
+                    </FormMessage>
+                  )}
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name="message"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>{t('fields.message.label')}*</FormLabel>
                   <Textarea
                     className="resize-none overflow-y-auto"
                     {...field}
                   />
-                  <FormMessage />
+                  {!!fieldState.error?.message && (
+                    <FormMessage>{t(fieldState.error?.message)}</FormMessage>
+                  )}
                 </FormItem>
               )}
             />
