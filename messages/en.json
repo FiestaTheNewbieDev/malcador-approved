@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "Clément FOSSORIER",
+    "title": "{domainName}",
     "description": ""
   },
   "navigation": {
@@ -15,6 +15,42 @@
     },
     "contact": {
       "label": "Contact"
+    }
+  },
+  "contactPage": {
+    "contactInformation": {
+      "title": "Contact Information"
+    },
+    "contactLinks": {
+      "title": "My Links"
+    },
+    "contactForm": {
+      "title": "Contact",
+      "fields": {
+        "firstName": {
+          "label": "First Name"
+        },
+        "lastName": {
+          "label": "Last Name"
+        },
+        "organizationName": {
+          "label": "Organization Name"
+        },
+        "email": {
+          "label": "Email"
+        },
+        "phoneNumber": {
+          "label": "Phone Number"
+        },
+        "message": {
+          "label": "Message"
+        }
+      },
+      "buttons": {
+        "submit": {
+          "label": "Submit"
+        }
+      }
     }
   },
   "comingSoonPage": {

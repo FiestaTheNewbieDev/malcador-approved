@@ -27,8 +27,10 @@
       "@hooks/*": ["./src/hooks/*"],
       "@i18n/*": ["./src/i18n/*"],
       "@lib/*": ["./src/lib/*"],
+      "@services/*": ["./src/services/*"],
       "@styles/*": ["./src/styles/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "package.json": ["./package.json"]
     }
   },
   "include": [

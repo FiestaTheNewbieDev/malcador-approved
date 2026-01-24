@@ -1,4 +1,5 @@
 name: 'Vercel Deployment'
+description: 'Deploys the project to Vercel using Vercel CLI'
 
 inputs:
   vercel-token:
