@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: 🔄 Pull malcador-approved
-        working-directory: ${{ vars.WORKDIR }}/
+        working-directory: ${{ vars.WORKDIR }}/malcador-approved
         run: git pull origin main
 
       - name: 🚀 Restart malcador-approved
