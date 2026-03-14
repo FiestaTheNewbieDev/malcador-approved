@@ -1,0 +1,54 @@
+name: CD
+
+on:
+  push:
+    branches: [main, feature/self-hosted-cd]
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: [self-hosted, production]
+
+    steps:
+      - name: 🔄 Pull malcador-approved
+        working-directory: ${{ vars.WORKDIR }}/
+        run: git pull origin main
+
+      - name: 🚀 Restart malcador-approved
+        working-directory: ${{ vars.WORKDIR }}
+        run: docker compose up malcador-approved --build -d
+
+      - name: ✅ Verify deployment
+        working-directory: ${{ vars.WORKDIR }}
+        run: |
+          echo "Waiting for service to start..."
+          if ! timeout 60 bash -c 'until curl -sf http://localhost:3001; do sleep 2; done'; then
+            echo "Health check failed!"
+            exit 1
+          fi
+          echo "Service is up!"
+
+      - name: ✅ Deployment summary (success)
+        if: success()
+        run: echo "### ✅ Deployed to production" >> $GITHUB_STEP_SUMMARY
+
+      - name: ❌ Deployment summary (failure)
+        if: failure()
+        run: echo "### ❌ Deployment failed" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📝 Deployment summary
+        if: always()
+        run: |
+          echo "|  |  |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Branch** | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Commit** | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| **By** | ${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📋 Dump logs on failure
+        if: failure()
+        working-directory: ${{ vars.WORKDIR }}
+        run: docker compose logs malcador-approved --tail=50 >> $GITHUB_STEP_SUMMARY
